@@ -109,7 +109,7 @@ services:
 
   mysql:
     image: mysql:8.0.30
-    container_name: halie-template-mysql
+    container_name: ${SITE_NAME}-mysql
     restart: unless-stopped
     tty: true
     ports:
@@ -253,8 +253,17 @@ echo -e "${BLUE} Testing the docker-compose.yml file"
 docker-compose -f docker-compose.yml config
 echo -e "${NC}docker-compose.yml file is: ${GREEN}${bold}OK!! "
 
-echo -e "${BLUE} To remove the setup kindly run ${bold}${CYAN} remove_docker_setup.sh"
-echo -e "${BLUE} The setup required you to have a ${RED}NODE${NC} from your machine. \n Use NVM to switch in different version!!!.  ${CYAN}'https://github.com/nvm-sh/nvm\ ${CYAN} NVM'  "
+
+echo -e "\n ${YELLOW}${bold} -----IMPORTANT----- ${NC} \n"
+echo -e "${bold}* ${normal}To remove the setup kindly run ${bold}${CYAN} remove_docker_setup.sh ${NC}"
+echo -e "${bold}* ${normal}Make sure to have the following statement in your hosts file: \n 127.0.0.1 ${SITE_NAME}.local www.${SITE_NAME}.local"
+echo -e "${bold}* ${normal}The setup required you to have a ${RED}NODE${NC} from your machine. \n  Use ${CYAN}NVM ${NC}to switch in different node version at ease. \n ${CYAN}'https://github.com/nvm-sh/nvm\ ${NC} NVM'  "
+echo -e "Following are the ${bold} DATABASE INFORMATION ${NC} ${YELLOW} Make Sure you successfully Spin Up the Setup first ${NC}
+# DB_HOST= ${SITE_NAME}-mysql
+# DB= ${SITE_NAME}_db
+# DB_USERNAME=root
+# DB_PASSWORD=<empty>"
+echo -e 'HOST FILE HERE... Instruction'
 
 }
 
