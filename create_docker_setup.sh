@@ -254,6 +254,7 @@ docker-compose -f docker-compose.yml config
 echo -e "${NC}docker-compose.yml file is: ${GREEN}${bold}OK!! "
 
 echo -e "${BLUE} To remove the setup kindly run ${bold}${CYAN} remove_docker_setup.sh"
+echo -e "${BLUE} The setup required you to have a ${RED}NODE${NC} from your machine. \n Use NVM to switch in different version!!!.  ${CYAN}'https://github.com/nvm-sh/nvm\ ${CYAN} NVM'  "
 
 }
 
