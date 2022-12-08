@@ -92,7 +92,7 @@ networks:
 
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:1.23.2
     container_name: ${SITE_NAME}-nginx
     tty: true
     ports:
@@ -175,17 +175,17 @@ server {
     }
 
     location / {
-        try_files $uri $uri/ /index.php?$args;
+        try_files \$uri \$uri/ /index.php?$args;
     }
 
     location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass php:9000;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
+      try_files \$uri /dev/null=404;
+      fastcgi_split_path_info ^(.+\.php)(/.+)$;
+      fastcgi_pass php:9000;
+      fastcgi_index index.php;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+      fastcgi_param PATH_INFO \$fastcgi_path_info;
     }
 }
 
@@ -245,8 +245,6 @@ post_max_size=32M
 EOF
 
 echo -e "${GREEN}GENERATED => ${NC}.lemp/php.Dockerfile"
-echo -e "${BLUE} PHP Container Included Program: ${NC} \n 1. PHP:8.0 \n 2. Composer:2 \n 3. Git2 \n 4. Vim, lsof \n 5. WP-CLI"
-echo -e "${BLUE} USAGE: \n ${NC}To enter the container and use the following programs \n Use the command:\n ${CYAN}${bold}'docker container exec -it ${SITE_NAME} bash' \n ${BLUE}This will enter the container environment 🙂. \n ${normal}To verify just type ${CYAN}${bold} PWD ${normal} command and it will return \n ${CYAN} /var/www/html ${NC}"
 
 
 echo -e "${BLUE} Testing the docker-compose.yml file"
@@ -255,15 +253,21 @@ echo -e "${NC}docker-compose.yml file is: ${GREEN}${bold}OK!! "
 
 
 echo -e "\n ${YELLOW}${bold} -----IMPORTANT----- ${NC} \n"
+echo -e "${bold}* ${normal}${BLUE} PHP Container Included Program: ${NC} \n 1. PHP:8.0 \n 2. Composer:2 \n 3. Git2 \n 4. Vim, lsof \n 5. WP-CLI"
+echo -e "${bold}* ${normal}${BLUE} USAGE: \n ${NC}To enter in the PHP container and use the following programs \n Use the command:\n ${CYAN}${bold}'docker container exec -it ${SITE_NAME} bash' \n ${BLUE}This will enter the container environment 🙂 \n ${normal}To verify just type ${CYAN}${bold} PWD ${normal} command and it will return \n ${CYAN} /var/www/html ${NC}"
 echo -e "${bold}* ${normal}To remove the setup kindly run ${bold}${CYAN} remove_docker_setup.sh ${NC}"
-echo -e "${bold}* ${normal}Make sure to have the following statement in your hosts file: \n 127.0.0.1 ${SITE_NAME}.local www.${SITE_NAME}.local"
+echo -e "${bold}* ${normal}Make sure to have the following statement in your ${CYAN}hosts file: \n
+${NC}Use the following command to navigate your hosts file.
+${CYAN} sudo nano /etc/hosts${NC} This will open up the file then add the following statement below \n
+${NC} ${bold}\n 127.0.0.1 ${SITE_NAME}.local www.${SITE_NAME}.local ${normal}"
 echo -e "${bold}* ${normal}The setup required you to have a ${RED}NODE${NC} from your machine. \n  Use ${CYAN}NVM ${NC}to switch in different node version at ease. \n ${CYAN}'https://github.com/nvm-sh/nvm\ ${NC} NVM'  "
-echo -e "Following are the ${bold} DATABASE INFORMATION ${NC} ${YELLOW} Make Sure you successfully Spin Up the Setup first ${NC}
+echo -e "${bold}${YELLOW}---DATABASE INFORMATION--- ${NC} ${YELLOW} \n Make Sure you successfully start the Setup first by running ${CYAN} docker-compose up --build ${NC}
 # DB_HOST= ${SITE_NAME}-mysql
 # DB= ${SITE_NAME}_db
 # DB_USERNAME=root
 # DB_PASSWORD=<empty>"
-echo -e 'HOST FILE HERE... Instruction'
+echo -e "${bold} EXPORTING DATABASE ${normal} Use the following command to export the Database from MySQL Container
+${CYAN} docker container exec -it ${SITE_NAME}-mysql /usr/bin/mysqldump -u root ${SITE_NAME}_db > backup.sql ${NC}"
 
 }
 

@@ -7,9 +7,11 @@
 read -p "Are you sure to remove the Docker Setup? [Y/N]" ANSWER
 case "$ANSWER" in
     [yY] | [yY][eE][sS])
+        # Remove the Docker Container
+        docker-compose down --rmi=all -v
+
         rm docker-compose.yml
         echo "Removed docker-compose.yml file"
-
         rm -rf .lemp
         echo "Removed .lemp folder"
         ;;
