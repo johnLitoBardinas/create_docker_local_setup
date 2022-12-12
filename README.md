@@ -32,7 +32,7 @@ chmod +x remove_docker_setup.sh
 ---
 # Their are two different scripts that you can use.
 
-1 ```create_docker_setup.sh``` - with this script we can create and populate the necessary files to be used in our setup
+__1)__ ```create_docker_setup.sh``` - with this script we can create and populate the necessary files to be used in our setup
 Simply running it by doing:
 ```./create_docker_setup.sh```
 
@@ -62,7 +62,7 @@ A detailed documentation can be found [here](https://app.clickup.com/6901085/doc
 
 
 
-2.```remove_docker_setup.sh``` - You can run this command optionally if you are sure to remove the setup in the application.
+__2)__```remove_docker_setup.sh``` - You can run this command optionally if you are sure to remove the setup in the application.
 
 __NOTE__
 
