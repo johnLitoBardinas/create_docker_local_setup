@@ -258,15 +258,15 @@ echo -e "${bold}* ${normal}${BLUE} USAGE: \n ${NC}To enter in the PHP container 
 echo -e "${bold}* ${normal}To remove the setup kindly run ${bold}${CYAN} remove_docker_setup.sh ${NC}"
 echo -e "${bold}* ${normal}Make sure to have the following statement in your ${CYAN}hosts file: \n
 ${NC}Use the following command to navigate your hosts file.
-${CYAN} sudo nano /etc/hosts${NC} This will open up the file then add the following statement below \n
+${CYAN} sudo nano /etc/hosts${NC} \n This will open up the file then add the following statement below
 ${NC} ${bold}\n 127.0.0.1 ${SITE_NAME}.local www.${SITE_NAME}.local ${normal}"
 echo -e "${bold}* ${normal}The setup required you to have a ${RED}NODE${NC} from your machine. \n  Use ${CYAN}NVM ${NC}to switch in different node version at ease. \n ${CYAN}'https://github.com/nvm-sh/nvm\ ${NC} NVM'  "
 echo -e "${bold}${YELLOW}---DATABASE INFORMATION--- ${NC} ${YELLOW} \n Make Sure you successfully start the Setup first by running ${CYAN} docker-compose up --build ${NC}
 # DB_HOST= ${SITE_NAME}-mysql
 # DB= ${SITE_NAME}_db
 # DB_USERNAME=root
-# DB_PASSWORD=<empty>"
-echo -e "${bold} EXPORTING DATABASE ${normal} Use the following command to export the Database from MySQL Container
+# DB_PASSWORD=<empty> \n"
+echo -e "${bold} EXPORTING DATABASE ${normal} \n Use the following command to export the Database from MySQL Container
 ${CYAN} docker container exec -it ${SITE_NAME}-mysql /usr/bin/mysqldump -u root ${SITE_NAME}_db > backup.sql ${NC}"
 
 }
